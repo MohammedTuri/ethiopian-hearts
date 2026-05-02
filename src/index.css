@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Cormorant Garamond", serif;
+  --font-sans: "Inter", sans-serif;
+  
+  --color-habesha-gold: #D4AF37;
+  --color-habesha-red: #8B0000;
+  --color-habesha-green: #2E8B57;
+  --color-habesha-cream: #F5F5DC;
+  --color-habesha-earth: #3E2723;
+}
+
+@layer base {
+  body {
+    @apply bg-habesha-cream text-habesha-earth font-sans;
+  }
+  
+  h1, h2, h3, h4 {
+    @apply font-serif;
+  }
+}
+
+.habesha-gradient {
+  background: linear-gradient(135deg, var(--color-habesha-earth) 0%, #1a0f0d 100%);
+}
+
+.habesha-pattern {
+  background-image: radial-gradient(var(--color-habesha-gold) 0.5px, transparent 0.5px);
+  background-size: 20px 20px;
+}
