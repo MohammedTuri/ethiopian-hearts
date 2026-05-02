@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Heart, User, MessageCircle, Settings, LogIn } from 'lucide-react';
 import { auth } from '../lib/firebase';
@@ -7,13 +7,17 @@ import { useAuth } from './FirebaseProvider';
 
 export const Navbar = () => {
   const { user } = useAuth();
+  const [loading, setLoading] = useState(false);
 
   const handleLogin = async () => {
+    setLoading(true);
     const provider = new GoogleAuthProvider();
     try {
       await signInWithPopup(auth, provider);
     } catch (error) {
       console.error('Login failed:', error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -33,11 +37,12 @@ export const Navbar = () => {
           </>
         ) : (
           <button 
+            disabled={loading}
             onClick={handleLogin}
-            className="flex items-center gap-2 bg-habesha-earth text-habesha-cream px-5 py-2 rounded-full text-sm font-medium hover:bg-habesha-earth/90 transition-all shadow-lg"
+            className="flex items-center gap-2 bg-habesha-earth text-habesha-cream px-5 py-2 rounded-full text-sm font-medium hover:bg-habesha-earth/90 transition-all shadow-lg disabled:opacity-50"
           >
             <LogIn size={18} />
-            Join Now
+            {loading ? 'Joining...' : 'Join Now'}
           </button>
         )}
       </div>
